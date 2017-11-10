@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Monster Slayer</title>
+    <!-- <script src="https://npmcdn.com/vue/dist/vue.js"></script> -->
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <link rel="stylesheet" href="css/app.css">
+    <script src="vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <template>{{winner}}</template>
+    <section class="row">
+        <div class="small-6 columns">
+            <h1 class="text-center">YOU</h1>
+            <div class="healthbar">
+                <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" :style="{width:lifeYou+'%'}">
+                    {{lifeYou}}
+                </div>
+            </div>
+        </div>
+        <div class="small-6 columns">
+            <h1 class="text-center">MONSTER</h1>
+            <div class="healthbar">
+                <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;" :style="{width:lifeMonster+'%'}">
+                    {{lifeMonster}}
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="row controls" v-if='!gameOn'>
+        <div class="small-12 columns">
+            <button id="start-game" @click='StartGame'>START NEW GAME</button>
+        </div>
+    </section>
+    <section class="row controls" v-if='gameOn'>
+        <div class="small-12 columns">
+            <button id="attack" @click='Attack'>ATTACK</button>
+            <button id="special-attack" @click='SpecialAttack'>SPECIAL ATTACK</button>
+            <button id="heal" @click='Heal'>HEAL</button>
+            <button id="give-up" @click='GiveUp'>GIVE UP</button>
+        </div>
+    </section>
+    <section class="row log" v-if='(logMsgs.length>0 & gameOn)'>
+        <div class="small-12 columns">
+            <ul>
+                <template v-for='Msg in logMsgs'>
+                    <li class='player-turn'>{{Msg.player}}</li>
+                    <li class='monster-turn'>{{Msg.monster}}</li>    
+                </template>
+            </ul>
+        </div>
+    </section>
+</div>
+<script src="app.vue"></script>
+</body>
+</html>
